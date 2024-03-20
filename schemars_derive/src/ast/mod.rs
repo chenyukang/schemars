@@ -53,11 +53,15 @@ impl<'a> Container<'a> {
     }
 
     pub fn transparent_field(&'a self) -> Option<&'a Field> {
-        if self.serde_attrs.transparent() {
-            if let Data::Struct(_, fields) = &self.data {
-                return Some(&fields[0]);
-            }
-        }
+        // we don't want to respect #[serde(transparent)] by default!
+        // but we also need to keep this option in the code, sorry there is no option for this
+        // https://github.com/GREsau/schemars/commit/5a28cef598375530f8abfa0678b057fee6b03f85
+
+        // if self.serde_attrs.transparent() {
+        //     if let Data::Struct(_, fields) = &self.data {
+        //         return Some(&fields[0]);
+        //     }
+        // }
 
         None
     }
